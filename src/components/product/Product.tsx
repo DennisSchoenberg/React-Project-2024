@@ -38,7 +38,7 @@ const Product = () => {
                 <h3>{product.category}</h3>
                 <span>Rating: {product.rating.rate} ({product.rating.count} reviews)</span>
                 <span>Price: ${product.price}</span>
-                <Link to={`/#/fake-store`}><button>Back</button></Link>
+                <Link to={`/fake-store`}><button>Back</button></Link>
         </div>
         </div>
     );
