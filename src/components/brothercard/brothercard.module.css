@@ -1,0 +1,17 @@
+.brotherCardContainer {
+  margin: 20px;
+  width: 300px;
+  background: #DBE6F6;
+  background: -webkit-linear-gradient(to right, #1f21a6, #DBE6F6);
+  background: linear-gradient(to right, #3b14b0, #DBE6F6);
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 20px;
+
+}
+
+.brotherCardContainer>img {
+  width: 100%;
+}

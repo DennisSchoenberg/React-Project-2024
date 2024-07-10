@@ -1,0 +1,45 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('https://papik.pro/grafic/uploads/posts/2023-04/1680658587_papik-pro-p-iskusstvennii-intellekt-poster-21.png'); /* Замените на путь к вашему изображению */
+  background-size: cover;
+  background-position: center;
+}
+
+.header {
+  width: 100%;
+  background-color: rgba(24, 36, 170, 0.9); /* Добавлено прозрачности */
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px; /* Округлённые углы */
+  margin: 10px; /* Отступы для видимости закругленных углов */
+}
+
+.header > a {
+  color: white;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.header > a:hover {
+  text-decoration: underline;
+}
+
+.main {
+  flex: 1;
+  margin: 20px; /* Отступы для главной части страницы */
+}
+
+.footer {
+  width: 100%;
+  background-color: rgba(23, 15, 112, 0.9); /* Добавлено прозрачности */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px; /* Округлённые углы */
+  margin: 10px; /* Отступы для видимости закругленных углов */
+}
