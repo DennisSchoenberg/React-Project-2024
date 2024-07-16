@@ -1,47 +1,50 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { IProduct } from "../fakeStore/FakeStore";
-import style from './product.module.css';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+
+import Button from '../button/Button';
+import styles from './product.module.css';
+import { Iproduct } from '../../features/reduxProducts/types';
 
 const Product = () => {
 
-    const initialValue: IProduct = {
-        id: 0,
-        title: "",
-        price: 0,
-        description: "",
-        category: "",
-        image: "",
-        rating: {
-            rate: 0,
-            count: 0
-        }
-    };
+  const initialValue: Iproduct = {
+    id: 0,
+    title: '',
+    price: 0,
+    description: '',
+    category: '',
+    image: '',
+    rating: {
+      rate: 0,
+      count: 0
+    }
+  };
+  const [product, setProduct] = useState<Iproduct>(initialValue);
+  // здесь мы забираем id из адресной строки
+  const { id } = useParams();
 
-    const [product, setProduct] = useState<IProduct>(initialValue);
+  useEffect(() => {
+    // здесь мы передаем id в качестве параметра в get
+    // запрос по отдельному продукту
+    fetch(`https://fakestoreapi.com/products/${id}`)
+      .then(res => res.json())
+      .then(data => setProduct(data));
+  }, [id]);
 
-    const { id } = useParams();
+  return (
+    <div className={styles.productContainer}>
+      {product.title && (
+        <>
+          <h1>{product.title}</h1>
+          <p>{product.description}</p>
+          <img width={300} src={product.image} alt="" />
+          <Link to={'/shop-page'}><Button name='назад' /></Link>
+        </>
+      )}
+    </div>
 
-    useEffect(() => {
-        fetch (`https://fakestoreapi.com/products/${id}`)
-        .then(res => res.json())
-        .then(data => setProduct(data))
-    }, [id]);
-
-    return (
-
-        <div className={style.productContainer}>
-            <img src={product.image} alt={product.title} className={style.productImage} />
-            <div className={style.productDetails}>
-                <h1>{product.title}</h1>
-                <h2>{product.description}</h2>
-                <h3>{product.category}</h3>
-                <span>Rating: {product.rating.rate} ({product.rating.count} reviews)</span>
-                <span>Price: ${product.price}</span>
-                <Link to={`/fake-store`}><button>Back</button></Link>
-        </div>
-        </div>
-    );
+  );
 };
 
 export default Product;

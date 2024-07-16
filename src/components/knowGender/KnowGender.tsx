@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './knowGender.module.css';
 
 interface IFormGender {
@@ -15,14 +14,16 @@ interface IGender {
 }
 
 const KnowGender: FC = () => {
+  // переменная для хранения
   const [name, setName] = useState<IGender | undefined>(undefined);
-  const navigate = useNavigate(); // Получаем функцию navigate для перенаправления
 
+  // специальный объект formik - результат вызова хука useFormik() с настройками
   const formik = useFormik({
     initialValues: {
       name: ''
     } as IFormGender,
     onSubmit: async (values: IFormGender, { resetForm }) => {
+      // вызов асинхронный функции с fetch запросом
       const res = await fetch(`https://api.genderize.io/?name=${values.name}`);
       const data = await res.json();
       console.log(data);
@@ -31,10 +32,6 @@ const KnowGender: FC = () => {
     }
   });
 
-  const redirectToHome = () => {
-    navigate('/'); // Перенаправление на главную страницу
-  };
-
   return (
     <>
       <span>✨ secret gender ✨</span>
@@ -42,13 +39,13 @@ const KnowGender: FC = () => {
         <input id='name' value={formik.values.name} onChange={formik.handleChange} type="text" />
         <button type='submit'>know secret gender 🤔</button>
       </form>
+      {/* если name?.name равен false - элементы не будут показаны */}
       {name?.name && (
         <>
           <p>{name?.name} is {name?.gender} {name?.probability * 100}% ⚡️</p>
         </>
       )}
 
-      <button onClick={redirectToHome}>Go to Home</button> {/* Кнопка для перенаправления */}
     </>
   );
 };

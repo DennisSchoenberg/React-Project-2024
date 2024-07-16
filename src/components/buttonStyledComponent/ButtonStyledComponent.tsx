@@ -23,3 +23,4 @@ export default function ButtonStyledComponent() {
     <StyledButton primary={true} >button</StyledButton>
   );
 }
+

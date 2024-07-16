@@ -11,6 +11,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 main {
   display: flex;
   flex-direction: column;
@@ -22,3 +24,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header > a {
+  color: white;
+  margin-right: 20px;
+  text-decoration: none;
+}
+

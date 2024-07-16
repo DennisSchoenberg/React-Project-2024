@@ -1,37 +1,49 @@
 import ReactDOM from 'react-dom/client';
-import EmployeeForm from './components/employeeForm/EmployeeForm';
-import './index.css';
+import { Provider } from 'react-redux';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import LoginForm from './components/loginForm/LoginForm';
-import BrotherHood from './homeworks/homework_08/brotherhood/BrotherHood';
+import EmployeeForm from './components/employeeForm/EmployeeForm';
 import FakeStore from './components/fakeStore/FakeStore';
+import HomePage from './components/homePage/HomePage';
+import Layout from './components/layout/Layout';
+import MyForm from './components/myForm/MyForm';
 import Product from './components/product/Product';
-import Auth from './components/auth/Auth'; // Импортируем Auth
-import Counter from './components/counter/Counter'; // Импортируем Counter
-import KnowGender from './components/knowGender/KnowGender'; // Импортируем KnowGender
+import TestParams from './components/testParams/TestParams';
+import { UserProvider } from './components/userContext/UserContext';
+import ReduxProducts from './features/reduxProducts/ReduxProducts';
+import BrotherHood from './homeworks/homework_08/brotherhood/BrotherHood';
+import './index.css';
+import { store } from './app/store';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
 root.render(
-  <HashRouter>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/login-form" element={<LoginForm />} />
-        <Route path="/brotherhood" element={<BrotherHood />} />
-        <Route path="/employee-form" element={<EmployeeForm />} />
-        <Route path="/fake-store" element={<FakeStore />} />
-        <Route path="/fake-store/:id" element={<Product />} />
-        <Route path="/auth" element={<Auth />} /> {/* Добавляем маршрут для Auth */}
-        <Route path="/counter" element={<Counter />} /> {/* Добавляем маршрут для Counter */}
-        <Route path="/know-gender" element={<KnowGender />} /> {/* Добавляем маршрут для KnowGender */}
-        <Route path="/" element={<h1>Home</h1>} />
-      </Route>
-    </Routes>
-  </HashRouter>
+  // оборачиваем все приложение в обертку Provider из redux
+  // в качестве props передаем store
+  <Provider store={store}>
+    <UserProvider>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<Layout />} >
+            <Route path='/' element={<HomePage />} />
+            <Route path='/login-form' element={<MyForm />} />
+            <Route path='/brotherhood' element={<BrotherHood />} />
+            <Route path='/employee-form' element={<EmployeeForm />} />
+            <Route path='/shop-page' element={<FakeStore />} />
+            <Route path='/redux-shop' element={<ReduxProducts />} />
+            <Route path='/shop-page/:id' element={<Product />} />
+            <Route path='/:name/:lastname' element={<TestParams />} />
+            <Route path='*' element={<h1>Error 404 😵</h1>} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </UserProvider>
+  </Provider>
 );
+
+
+
 
 
 

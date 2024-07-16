@@ -9,11 +9,12 @@ interface IBrotherProps {
   setBrothers: Dispatch<SetStateAction<IBrother[]>>;
 }
 
-export default function BrotherPropCard({ brotherProp, setBrothers }: IBrotherProps) {
 
-  const delBrother = (id: number) => {
-    setBrothers(prev => prev.filter(brother => brother.id !== id));
-  };
+export default function brotherPropCard({ brotherProp, setBrothers }: IBrotherProps) {
+
+  // const delBrother = (id: number) => {
+  //   setBrothers(prev => prev.filter(brother => brother.id !== id));
+  // };
 
   return (
     <div className={styles.brotherCardContainer}>
@@ -25,13 +26,9 @@ export default function BrotherPropCard({ brotherProp, setBrothers }: IBrotherPr
           <li key={v4()}>{skill}</li>
         ))}
       </ol>
-      <img src={brotherProp.image} alt={brotherProp.name} />
-      <button 
-        style={{ marginTop: '10px' }}
-        onClick={() => delBrother(brotherProp.id)}
-      >
-        Delete brother
-      </button>
+      <img src={brotherProp.image} alt="" />
+      {/* <ButtonStyledComponent/> */}
+      <button style={{ marginTop: '10px' }}>Delete brother</button>
     </div>
   );
 }
